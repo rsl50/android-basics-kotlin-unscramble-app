@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 class GameViewModel : ViewModel() {
 
     private var score = 0
-    private var currentWordCount = 0
+    private var _currentWordCount = 0
+    val currentWordCount: Int
+        get() = _currentWordCount
     private lateinit var _currentScrambledWord: String
     val currentScrambledWord: String
         get() = _currentScrambledWord
@@ -35,7 +37,7 @@ class GameViewModel : ViewModel() {
             // Update the value with the newly scrambled word
             _currentScrambledWord = String(tempWord)
             // Increase the word count
-            ++currentWordCount
+            ++_currentWordCount
             // Add the new word to the list
             wordsList.add(currentWord)
         }
@@ -44,6 +46,17 @@ class GameViewModel : ViewModel() {
     init {
         Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
+    }
+
+    /*
+    * Returns true if the current word count is less than MAX_NO_OF_WORDS.
+    * Updates the next word.
+    */
+    fun nextWord(): Boolean {
+        return if (currentWordCount < MAX_NO_OF_WORDS) {
+            getNextWord()
+            true
+        } else false
     }
 
     override fun onCleared() {
