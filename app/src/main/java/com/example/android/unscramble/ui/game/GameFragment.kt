@@ -67,18 +67,6 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-
-
-        // Observe the score LiveData, passing in the LifecycleOwner and the observer.
-        viewModel.score.observe(viewLifecycleOwner, {
-            newScore -> binding.score.text = getString(R.string.score, newScore)
-        })
-
-        // Observe the currentWordCount LiveData, passing in the LifecycleOwner and the observer.
-        viewModel.currentWordCount.observe(viewLifecycleOwner, {
-            newWordCount -> binding.wordCount.text = getString(R.string.word_count, newWordCount,
-            MAX_NO_OF_WORDS)
-        })
     }
 
     override fun onDetach() {
