@@ -51,6 +51,13 @@ class GameViewModel : ViewModel() {
     }
 
     /*
+    * Increase the score variable by SCORE_INCREASE.
+    */
+    private fun increaseScore() {
+        _score += SCORE_INCREASE
+    }
+
+    /*
     * Returns true if the current word count is less than MAX_NO_OF_WORDS.
     * Updates the next word.
     */
@@ -60,6 +67,18 @@ class GameViewModel : ViewModel() {
             true
         } else false
     }
+
+    /*
+    * Validate the player's word and increase the score if the guess is correct.
+    */
+    fun isUserWordCorrect(playerWord: String): Boolean {
+        if (playerWord.equals(currentWord, true)) {
+            increaseScore()
+            return true
+        }
+        return false
+    }
+
 
     override fun onCleared() {
         super.onCleared()
